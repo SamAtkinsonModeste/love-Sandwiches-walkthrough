@@ -5,6 +5,8 @@ import gspread
 #which is part of the service_account  function from the Google auth library.
 #As we only need this class for our project, there  is no need to import the entire library here.
 from google.oauth2.service_account import Credentials
+#Installing PPRINT
+from pprint import pprint
 
 
 #Every Google account has an IAM configuration.
@@ -78,14 +80,46 @@ def update_sales_worksheet(data):
      sales_worksheet.append_row(data)
      print("Sales works updated successfully.\n")
 
-data = get_sales_data()
-#when we print our data below it returns a list of strings.
-#print(data)
-#['1', '2', '3', '4', '5', '6']
-#In order for our spreadsheet to accept it, we need to convert these  values into integers.
-#We will convert the above string with a List Comprehension
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+def calculate_surplus_data(sales_row):
+     """
+    Compare sales with stock and calculate the surplus for each item type.
+
+    The surplus is defined as the sales figure subtracted from the stock:
+    - Positive surplus indicates waste
+    - Negative surplus indicates extra made when stock was sold out.
+     """
+     print("Caluculating surplus data...\n")
+     #In order to calculate our surplus, we also  need our stock data for before the market from the stock worksheet.
+     stock = SHEET.worksheet("stock").get_all_values()
+     #We use pprint() method here instead of the standard  print statement, so our data is easier to read
+     #pprint(stock)
+     #Variable for the last row in our stock worksheet
+     #By using Slice
+     stock_row = stock[-1]
+     print(stock_row)
+
+
+
+
+
+
+#It's common practice to wrap the main function calls of a program within a function called main.
+def  main():
+    """
+    Run all program functions
+    """
+    data = get_sales_data()
+    #when we print our data below it returns a list of strings.
+    #print(data)
+    #['1', '2', '3', '4', '5', '6']
+    #In order for our spreadsheet to accept it, we need to convert these  values into integers.
+    #We will convert the above string with a List Comprehension
+    sales_data = [int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    calculate_surplus_data(sales_data)
+
+print("Welcome to Love Sandwiches Data Automation\n")
+main()
 
 
 
