@@ -63,9 +63,29 @@ def validate_data(values):
           
     
 
-
+def update_sales_worksheet(data):
+     """
+     Update sales worksheet, and add new row with the list data provided.
+     """
+     print("Updating sales worksheet...\n")
+     #To access our worksheets we create a variable sales_worksheet an assign it our variable SHEET
+     #The SHEET variable uses the gspread library
+     #We use the gspread worksheet()  method to access our sales worksheet.
+     #The value we put in worksheet() relates to the name of our worksheet.
+     sales_worksheet = SHEET.worksheet("sales")
+     #We now use a gspread Method called append_row() and pass it our data to be inserted
+     #The append_row method adds a new row to the  end of our data in the worksheet selected.
+     sales_worksheet.append_row(data)
+     print("Sales works updated successfully.\n")
 
 data = get_sales_data()
+#when we print our data below it returns a list of strings.
+#print(data)
+#['1', '2', '3', '4', '5', '6']
+#In order for our spreadsheet to accept it, we need to convert these  values into integers.
+#We will convert the above string with a List Comprehension
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
 
 
 
