@@ -108,6 +108,27 @@ def calculate_surplus_data(sales_row):
      #print(surplus_data)
      return surplus_data
 
+
+
+def get_last_5_entries_sales():
+     """
+     Collects columns of data from sales worksheet, collecting
+    the last 5 entries for each sandwich and returns the data
+    as a list of lists.
+     """
+     sales = SHEET.worksheet('sales')
+    #  column = sales.col_values(3)
+    #  print(column)
+     columns = []
+     for i in range(1, 7):
+        # print(i) 
+        column = sales.col_values(i)
+        columns.append(column[-5:])
+
+     #pprint(columns)
+     return columns
+       
+
      
 
 
@@ -132,7 +153,9 @@ def  main():
     update_worksheet(new_surplus_data, "surplus")
 
 print("Welcome to Love Sandwiches Data Automation\n")
-main()
+# main()
+
+sales_columns = get_last_5_entries_sales()
 
 
 
