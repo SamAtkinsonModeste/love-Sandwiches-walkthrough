@@ -96,9 +96,22 @@ def calculate_surplus_data(sales_row):
      #Variable for the last row in our stock worksheet
      #By using Slice
      stock_row = stock[-1]
-     print(stock_row)
+     #last_stock_row = [int(num) for num in stock_row]
+     #print(stock_row)
+     #print(f"stock row:{stock_row}")
+     #print(f"sales row:{sales_row}")
 
+     #We use our sales data  and our stock data to calculate the surplus.
+     #Our surplus number is the stock number  -  sales for each sandwich.
+     surplus_data = []
+     for stock, sales in zip(stock_row, sales_row):
+          surplus = int(stock) - sales
+          surplus_data.append(surplus)
 
+     #print(surplus_data)
+     return surplus_data
+
+     
 
 
 
@@ -116,7 +129,8 @@ def  main():
     #We will convert the above string with a List Comprehension
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
-    calculate_surplus_data(sales_data)
+    new_surplus_data = calculate_surplus_data(sales_data)
+    print(new_surplus_data)
 
 print("Welcome to Love Sandwiches Data Automation\n")
 main()
