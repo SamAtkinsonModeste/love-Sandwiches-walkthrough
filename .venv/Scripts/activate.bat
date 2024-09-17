@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=c:\Users\sammo\OneDrive\Documents\Code-Institute\2.practice-coding-with-code-institute\3.love-sandwiches\love-Sandwiches-walkthrough\.venv
+set VIRTUAL_ENV=C:\Users\sammo\OneDrive\Documents\Code-Institute\2.practice-coding-with-code-institute\3.love-sandwiches\love-Sandwiches-walkthrough\love-Sandwiches-walkthrough\.venv
 
 if not defined PROMPT set PROMPT=$P$G
 
